@@ -1,6 +1,5 @@
 ---
 import Container from '@components/common/Container.astro';
-import { getLocaleData } from '@lib/i18n';
 import type { Locale } from '@lib/i18n';
 
 export interface Props {
@@ -8,7 +7,6 @@ export interface Props {
 }
 
 const { locale } = Astro.props;
-const t = getLocaleData(locale);
 
 const features = [
   {
