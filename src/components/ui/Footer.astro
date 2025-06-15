@@ -1,5 +1,5 @@
 ---
-import { getLocaleData, localizedUrl } from '@lib/i18n';
+import { getLocaleData } from '@lib/i18n';
 import type { Locale } from '@lib/i18n';
 
 export interface Props {
@@ -33,17 +33,17 @@ const currentYear = new Date().getFullYear();
         <h3 class="font-display font-semibold mb-4">{t.nav.solutions}</h3>
         <ul class="space-y-2">
           <li>
-            <a href={localizedUrl('/solutions#data-ops', locale)} class="text-gray-600 hover:text-primary transition-colors">
+            <a href={'/solutions#data-ops'} class="text-gray-600 hover:text-primary transition-colors">
               {t.solutions.dataOps.title}
             </a>
           </li>
           <li>
-            <a href={localizedUrl('/solutions#marketing', locale)} class="text-gray-600 hover:text-primary transition-colors">
+            <a href={'/solutions#marketing'} class="text-gray-600 hover:text-primary transition-colors">
               {t.solutions.marketing.title}
             </a>
           </li>
           <li>
-            <a href={localizedUrl('/solutions#trading', locale)} class="text-gray-600 hover:text-primary transition-colors">
+            <a href={'/solutions#trading'} class="text-gray-600 hover:text-primary transition-colors">
               {t.solutions.trading.title}
             </a>
           </li>
@@ -55,17 +55,17 @@ const currentYear = new Date().getFullYear();
         <h3 class="font-display font-semibold mb-4">Vecia</h3>
         <ul class="space-y-2">
           <li>
-            <a href={localizedUrl('/about', locale)} class="text-gray-600 hover:text-primary transition-colors">
+            <a href={'/about'} class="text-gray-600 hover:text-primary transition-colors">
               {t.nav.about}
             </a>
           </li>
           <li>
-            <a href={localizedUrl('/process', locale)} class="text-gray-600 hover:text-primary transition-colors">
+            <a href={'/process'} class="text-gray-600 hover:text-primary transition-colors">
               {t.nav.process}
             </a>
           </li>
           <li>
-            <a href={localizedUrl('/contact', locale)} class="text-gray-600 hover:text-primary transition-colors">
+            <a href={'/contact'} class="text-gray-600 hover:text-primary transition-colors">
               {t.nav.contact}
             </a>
           </li>
@@ -80,10 +80,10 @@ const currentYear = new Date().getFullYear();
           {t.footer.copyright.replace('2025', currentYear.toString())}
         </p>
         <div class="flex space-x-6">
-          <a href={localizedUrl('/privacy', locale)} class="text-sm text-gray-600 hover:text-primary transition-colors">
+          <a href={'/privacy'} class="text-sm text-gray-600 hover:text-primary transition-colors">
             {t.footer.privacy}
           </a>
-          <a href={localizedUrl('/terms', locale)} class="text-sm text-gray-600 hover:text-primary transition-colors">
+          <a href={'/terms'} class="text-sm text-gray-600 hover:text-primary transition-colors">
             {t.footer.terms}
           </a>
           <button class="text-sm text-gray-600 hover:text-primary transition-colors" data-cc="show-preferencesModal">
