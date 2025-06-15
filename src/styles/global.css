@@ -17,7 +17,7 @@
   }
 
   * {
-    @apply border-border;
+    border-color: theme('colors.gray.200');
   }
 
   body {
