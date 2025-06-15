@@ -1,0 +1,104 @@
+---
+import Container from '@components/common/Container.astro';
+import { getLocaleData } from '@lib/i18n';
+import type { Locale } from '@lib/i18n';
+
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getLocaleData(locale);
+
+const steps = [
+  {
+    number: '1',
+    title: t.process.steps.discovery.title,
+    description: t.process.steps.discovery.description,
+    duration: locale === 'fr-fr' ? '1 jour' : locale === 'fr-ch' ? '1 jour' : '1 day',
+    color: 'text-primary',
+  },
+  {
+    number: '2',
+    title: t.process.steps.sprint.title,
+    description: t.process.steps.sprint.description,
+    duration: locale === 'fr-fr' ? '2 semaines' : locale === 'fr-ch' ? '2 semaines' : '2 weeks',
+    color: 'text-secondary',
+  },
+  {
+    number: '3',
+    title: t.process.steps.measure.title,
+    description: t.process.steps.measure.description,
+    duration: locale === 'fr-fr' ? '4 semaines' : locale === 'fr-ch' ? '4 semaines' : '4 weeks',
+    color: 'text-accent',
+  },
+  {
+    number: '4',
+    title: t.process.steps.support.title,
+    description: t.process.steps.support.description,
+    duration: locale === 'fr-fr' ? 'Continu' : locale === 'fr-ch' ? 'Continu' : 'Ongoing',
+    color: 'text-accent-purple',
+  },
+];
+---
+
+<section class="section bg-gray-50">
+  <Container>
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">
+        {t.process.title}
+      </h2>
+      <p class="text-lg text-gray-600">
+        {t.process.subtitle}
+      </p>
+    </div>
+    
+    <div class="max-w-4xl mx-auto">
+      {steps.map((step, index) => (
+        <div class="relative">
+          {/* Timeline line */}
+          {index < steps.length - 1 && (
+            <div class="absolute left-8 top-16 w-0.5 h-full bg-gray-300"></div>
+          )}
+          
+          <div class="flex items-start space-x-6 mb-12">
+            {/* Step number */}
+            <div class={`w-16 h-16 rounded-full bg-white shadow-md flex items-center justify-center ${step.color} text-2xl font-display font-bold flex-shrink-0 relative z-10`}>
+              {step.number}
+            </div>
+            
+            {/* Content */}
+            <div class="flex-1 bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200">
+              <div class="flex items-start justify-between mb-2">
+                <h3 class="text-xl font-display font-semibold">
+                  {step.title}
+                </h3>
+                <span class="text-sm font-medium text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+                  {step.duration}
+                </span>
+              </div>
+              <p class="text-gray-600">
+                {step.description}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    {/* Timeline graphic */}
+    <div class="mt-16 max-w-3xl mx-auto">
+      <div class="bg-white rounded-2xl p-8 shadow-sm">
+        <h3 class="text-lg font-display font-semibold mb-4 text-center">
+          {locale === 'fr-fr' ? 'Chronologie sur 8 semaines' : locale === 'fr-ch' ? 'Planning sur 8 semaines' : '8-Week Timeline'}
+        </h3>
+        <div class="relative h-12 bg-gray-100 rounded-full overflow-hidden">
+          <div class="absolute inset-y-0 left-0 w-1/8 bg-primary rounded-full"></div>
+          <div class="absolute inset-y-0 left-1/8 w-2/8 bg-secondary rounded-full"></div>
+          <div class="absolute inset-y-0 left-3/8 w-3/8 bg-accent rounded-full"></div>
+          <div class="absolute inset-y-0 left-6/8 w-2/8 bg-accent-purple rounded-full"></div>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>

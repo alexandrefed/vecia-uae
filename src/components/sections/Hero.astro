@@ -1,0 +1,97 @@
+---
+import Container from '@components/common/Container.astro';
+import Button from '@components/common/Button.astro';
+import { getLocaleData } from '@lib/i18n';
+import type { Locale } from '@lib/i18n';
+
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getLocaleData(locale);
+---
+
+<section class="pt-32 pb-16 md:pt-40 md:pb-24 bg-gradient-to-b from-accent-light/20 to-white">
+  <Container>
+    <div class="text-center max-w-4xl mx-auto">
+      <!-- Tagline -->
+      <p class="text-sm md:text-base font-medium text-primary mb-6 animate-fade-in">
+        {t.tagline}
+      </p>
+      
+      <!-- Headline -->
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold tracking-tight mb-6 animate-fade-up">
+        {t.hero.headline}
+      </h1>
+      
+      <!-- Subheading -->
+      <p class="text-lg md:text-xl text-gray-600 mb-10 animate-fade-up max-w-3xl mx-auto" style="animation-delay: 0.1s">
+        {t.hero.subheading}
+      </p>
+      
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up" style="animation-delay: 0.2s">
+        <Button 
+          href={t.hero.cta_link || '#contact'}
+          size="lg"
+          external={t.hero.cta_link?.startsWith('http')}
+        >
+          {t.hero.cta_primary}
+        </Button>
+        <Button 
+          href="#download"
+          variant="secondary"
+          size="lg"
+        >
+          {t.hero.cta_secondary}
+        </Button>
+      </div>
+    </div>
+    
+    <!-- Visual placeholder -->
+    <div class="mt-16 animate-fade-up" style="animation-delay: 0.3s">
+      <div class="relative mx-auto max-w-5xl">
+        <div class="aspect-[16/9] bg-gradient-primary rounded-2xl shadow-2xl flex items-center justify-center">
+          <div class="text-white text-center p-8">
+            <p class="text-2xl font-display mb-4">Shopify → n8n agents → Dashboard</p>
+            <p class="text-lg opacity-80">Animation placeholder</p>
+          </div>
+        </div>
+        <!-- Decorative elements -->
+        <div class="absolute -top-4 -left-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl"></div>
+        <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-accent/10 rounded-full blur-2xl"></div>
+      </div>
+    </div>
+  </Container>
+</section>
+
+<style>
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+  
+  .animate-fade-up {
+    animation: fadeUp 0.6s ease-out forwards;
+  }
+</style>

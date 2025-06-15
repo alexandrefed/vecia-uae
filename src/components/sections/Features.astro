@@ -1,0 +1,78 @@
+---
+import Container from '@components/common/Container.astro';
+import { getLocaleData } from '@lib/i18n';
+import type { Locale } from '@lib/i18n';
+
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getLocaleData(locale);
+
+const features = [
+  {
+    today: locale === 'fr-fr' ? 'Copier-coller manuel entre apps' : locale === 'fr-ch' ? 'Copier-coller manuel entre applications' : 'Manual copy-paste across apps',
+    withVecia: locale === 'fr-fr' ? 'Tableaux de bord auto-actualisés' : locale === 'fr-ch' ? 'Tableaux de bord auto-actualisés' : 'Self-updating dashboards',
+    icon: '📋',
+  },
+  {
+    today: locale === 'fr-fr' ? 'Chatbots génériques qui hallucinent' : locale === 'fr-ch' ? 'Chatbots génériques peu fiables' : 'Generic chatbots that hallucinate',
+    withVecia: locale === 'fr-fr' ? 'Agents formés sur votre domaine avec validation humaine' : locale === 'fr-ch' ? 'Agents spécialisés avec contrôle humain' : 'Domain-trained agents with human-in-loop review',
+    icon: '🤖',
+  },
+  {
+    today: locale === 'fr-fr' ? 'Licences entreprise coûteuses' : locale === 'fr-ch' ? 'Licences entreprise onéreuses' : 'Expensive enterprise licenses',
+    withVecia: locale === 'fr-fr' ? 'Forfaits modulaires évolutifs' : locale === 'fr-ch' ? 'Solutions modulaires flexibles' : 'Modular pay-as-you-grow packages',
+    icon: '💰',
+  },
+];
+---
+
+<section class="section bg-gray-50">
+  <Container>
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">
+        {locale === 'fr-fr' ? 'Problème → Promesse' : locale === 'fr-ch' ? 'Défi → Solution' : 'Problem → Promise'}
+      </h2>
+      <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+        {locale === 'fr-fr' 
+          ? "L'adoption de l'IA est freinée par les difficultés d'intégration—Vecia résout d'abord l'intégration."
+          : locale === 'fr-ch'
+          ? "L'adoption de l'IA est ralentie par les défis d'intégration—Vecia offre une solution complète."
+          : "AI adoption is stalled by integration pain—Vecia solves integration first."}
+      </p>
+    </div>
+    
+    <div class="grid md:grid-cols-3 gap-8">
+      {features.map((feature) => (
+        <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-all duration-200">
+          <div class="text-4xl mb-6">{feature.icon}</div>
+          
+          <div class="space-y-4">
+            <div>
+              <h3 class="font-display font-semibold text-red-600 mb-2">
+                {locale === 'fr-fr' ? 'Aujourd\'hui' : locale === 'fr-ch' ? 'Actuellement' : 'Today'}
+              </h3>
+              <p class="text-gray-600">{feature.today}</p>
+            </div>
+            
+            <div class="relative">
+              <div class="absolute left-0 top-1/2 w-full h-px bg-gray-300"></div>
+              <div class="relative bg-white inline-block px-3">
+                <span class="text-2xl">→</span>
+              </div>
+            </div>
+            
+            <div>
+              <h3 class="font-display font-semibold text-green-600 mb-2">
+                {locale === 'fr-fr' ? 'Avec Vecia' : locale === 'fr-ch' ? 'Avec Vecia' : 'With Vecia'}
+              </h3>
+              <p class="text-gray-800 font-medium">{feature.withVecia}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </Container>
+</section>

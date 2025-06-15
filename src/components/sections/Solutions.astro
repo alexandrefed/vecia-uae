@@ -1,0 +1,82 @@
+---
+import Container from '@components/common/Container.astro';
+import Card from '@components/common/Card.astro';
+import { getLocaleData, localizedUrl } from '@lib/i18n';
+import type { Locale } from '@lib/i18n';
+
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getLocaleData(locale);
+
+const solutions = [
+  {
+    id: 'data-ops',
+    title: t.solutions.dataOps.title,
+    description: t.solutions.dataOps.description,
+    icon: '📊',
+    gradient: 'from-primary to-accent',
+  },
+  {
+    id: 'marketing',
+    title: t.solutions.marketing.title,
+    description: t.solutions.marketing.description,
+    icon: '🚀',
+    gradient: 'from-secondary to-primary',
+  },
+  {
+    id: 'trading',
+    title: t.solutions.trading.title,
+    description: t.solutions.trading.description,
+    icon: '📈',
+    gradient: 'from-accent to-accent-purple',
+  },
+  {
+    id: 'custom',
+    title: t.solutions.custom.title,
+    description: t.solutions.custom.description,
+    icon: '🔒',
+    gradient: 'from-accent-purple to-secondary',
+  },
+];
+---
+
+<section class="section">
+  <Container>
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">
+        {t.solutions.title}
+      </h2>
+    </div>
+    
+    <div class="grid md:grid-cols-2 gap-8">
+      {solutions.map((solution) => (
+        <div class="group relative">
+          <div class="absolute -inset-1 bg-gradient-to-r {solution.gradient} opacity-25 blur-lg group-hover:opacity-40 transition-opacity duration-200"></div>
+          <Card class="relative h-full">
+            <div class="flex items-start space-x-4">
+              <div class={`w-14 h-14 rounded-xl bg-gradient-to-br ${solution.gradient} flex items-center justify-center text-white text-2xl flex-shrink-0`}>
+                {solution.icon}
+              </div>
+              <div class="flex-1">
+                <h3 class="text-xl font-display font-semibold mb-2">
+                  {solution.title}
+                </h3>
+                <p class="text-gray-600">
+                  {solution.description}
+                </p>
+              </div>
+            </div>
+            <a 
+              href={localizedUrl(`/solutions#${solution.id}`, locale)}
+              class="absolute inset-0"
+              aria-label={`En savoir plus sur ${solution.title}`}
+            ></a>
+          </Card>
+        </div>
+      ))}
+    </div>
+  </Container>
+</section>

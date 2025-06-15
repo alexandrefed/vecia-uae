@@ -1,0 +1,42 @@
+---
+import { locales, switchLocale } from '@lib/i18n';
+import type { Locale } from '@lib/i18n';
+
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const localeLabels: Record<Locale, string> = {
+  'fr-fr': 'FR 🇫🇷',
+  'fr-ch': 'CH 🇨🇭',
+  'en-ae': 'AE 🇦🇪',
+};
+---
+
+<div class="relative group">
+  <button
+    class="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+    aria-label="Change language"
+  >
+    <span class="text-sm font-medium">{localeLabels[locale]}</span>
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+    </svg>
+  </button>
+  
+  <div class="absolute right-0 mt-2 w-32 bg-white rounded-lg shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+    {locales.map(loc => (
+      <a
+        href={switchLocale(Astro.url, loc)}
+        class:list={[
+          'block px-4 py-2 text-sm hover:bg-gray-50 transition-colors duration-200',
+          locale === loc && 'font-semibold text-primary'
+        ]}
+      >
+        {localeLabels[loc]}
+      </a>
+    ))}
+  </div>
+</div>
